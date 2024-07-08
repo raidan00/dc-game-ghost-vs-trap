@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<link rel="icon" href="data:," />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Pick Up And Throw</title>
+		<style>
+			body {
+				margin: 0;
+				font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+				background: #0089B9;
+			}
+			#initialLoading {
+				width: 100vw;
+				height: 100vh;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				font-size: min(15vw, 15vh);
+			}
+		</style>
+	</head>
+	<body>
+		<div id="initialLoading" style="">
+			<div>Loading</div>
+			<div id="loadingDots" style="width: 0px"></div>
+		</div>
+		<script>
+			{
+				let el = document.getElementById('initialLoading');
+				let dots = document.getElementById('loadingDots');
+				let dotNum = 1;
+				let interval = setInterval(()=>{
+					if(++dotNum >= 5)dotNum = 1;
+					dots.innerHTML = new Array(dotNum).join(".");
+				},800);
+				window.onLoadFinished = ()=>{
+					clearInterval(interval);
+					delete window.onLoadFinished
+					el.remove()
+				}
+			}
+		</script>
+		<div id="app"></div>
+		<script type="module" src="/src/main.js"></script>
+	</body>
+</html>
